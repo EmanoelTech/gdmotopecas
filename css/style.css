@@ -1,0 +1,294 @@
+/**
+ * Documentação CSS
+ * Autor: Emanoel tech(janio emanoel)
+ * Projeto: GD Moto Peças (Versão com carrossel e responsividade aprimorada)
+ */
+
+/* --- Variáveis de Cores e Fontes --- */
+:root {
+    --cor-primaria: #0d6efd;
+    --cor-secundaria: #212529;
+    --cor-fundo-claro: #f8f9fa;
+    --cor-branco: #ffffff;
+    --fonte-titulo: 'Titillium Web', sans-serif;
+    --fonte-corpo: 'Roboto', sans-serif;
+}
+
+/* --- Estilos Gerais --- */
+body {
+    font-family: var(--fonte-corpo);
+    line-height: 1.6;
+    color: #444;
+    overflow-x: hidden;
+}
+
+[data-aos] {
+    transition-property: transform, opacity;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+}
+
+.section-title {
+    color: var(--cor-secundaria);
+    font-weight: 700;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 2rem !important;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute; display: block;
+    width: 60px; height: 3px;
+    background: var(--cor-primaria);
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+}
+
+.btn-primary {
+    background-color: var(--cor-primaria);
+    border-color: var(--cor-primaria);
+    padding: 12px 30px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+/* --- Cabeçalho --- */
+#main-header .navbar {
+    background-color: rgba(33, 37, 41, 0.9);
+    padding: 10px 0;
+    transition: background-color 0.4s ease, padding 0.4s ease;
+}
+
+#main-header.scrolled .navbar {
+    background-color: var(--cor-secundaria);
+    padding: 5px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+#main-header .nav-link {
+    color: var(--cor-branco);
+    margin: 0 10px;
+    transition: color 0.3s;
+    font-weight: 500;
+}
+
+#main-header .nav-link:hover,
+#main-header .nav-link.active {
+    color: var(--cor-primaria);
+}
+
+#main-header .nav-link.btn {
+    color: var(--cor-branco) !important;
+    padding: 8px 20px !important;
+}
+
+/* --- Seção Home (Banner) --- */
+#home {
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/banner.jpg') no-repeat center center/cover;
+    background-attachment: fixed;
+}
+
+/* --- Produtos e Serviços --- */
+.product-card {
+    border: 1px solid #eee;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.product-card img { height: 200px; object-fit: cover; }
+.service-item i { color: var(--cor-primaria); }
+
+/* --- Marcas Parceiras (Swiper Carousel) --- */
+.marcas-swiper .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 100px;
+}
+
+.marcas-swiper .swiper-slide img {
+    max-height: 60px;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all 0.4s ease;
+}
+
+.marcas-swiper .swiper-slide-active img {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+@media (min-width: 992px) {
+    .marcas-swiper .swiper-slide img {
+        filter: grayscale(100%);
+        opacity: 0.6;
+    }
+    .marcas-swiper .swiper-slide:hover img {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+/* --- Galeria --- */
+#galeria img {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#galeria img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* --- Depoimentos --- */
+.testimonial-card {
+    border: 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-top: 4px solid var(--cor-primaria);
+    height: 100%;
+}
+
+.testimonial-card .card-body { font-style: italic; color: #555; }
+.testimonial-card .card-footer {
+    background: none; border-top: 0;
+    display: flex;
+    align-items: center;
+}
+.testimonial-card .card-footer img {
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+}
+.testimonial-card .card-footer span {
+    font-weight: bold;
+    color: var(--cor-secundaria);
+}
+
+/* --- Contato e Rodapé --- */
+.contact-info i { color: var(--cor-primaria); margin-right: 10px; width: 20px; text-align: center; }
+.map-container { overflow: hidden; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+footer a { text-decoration: none; transition: color 0.3s; }
+footer a:hover { color: var(--cor-primaria) !important; }
+footer .fab { font-size: 1.5rem; }
+
+/* ==============================================
+--- RESPONSIVIDADE ---
+Aqui começam os ajustes para telas menores
+==============================================
+*/
+
+/* Estilos para telas de tablet e menores (até 992px) */
+@media (max-width: 992px) {
+    html {
+        /* Ajusta o ponto de parada do scroll para compensar a altura do header fixo */
+        scroll-padding-top: 70px; 
+    }
+
+    #main-header .navbar-nav {
+        background-color: var(--cor-secundaria);
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 10px;
+        text-align: center; /* Centraliza os links do menu */
+    }
+
+    #main-header .nav-item {
+        margin-bottom: 10px; /* Adiciona um espaço entre os itens do menu */
+    }
+
+    #main-header .nav-item:last-child {
+        margin-bottom: 0;
+    }
+    
+    #main-header .nav-link.btn {
+        display: inline-block; /* Garante que o botão se comporte bem no centro */
+        width: auto;
+    }
+}
+
+/* Estilos específicos para telas de celular (até 768px) */
+@media (max-width: 768px) {
+    /* --- Tipografia Mobile --- */
+    h1 {
+        /* Reduz o tamanho do título principal para caber melhor na tela */
+        font-size: 2.5rem; 
+    }
+
+    .section-title {
+        /* Reduz o tamanho dos títulos de seção */
+        font-size: 1.6rem;
+    }
+
+    /* --- Seção Home (Banner) --- */
+    #home {
+        /* Usar 'min-height' é mais seguro que 'height' para evitar cortes */
+        min-height: 90vh; 
+        /* Desativa o efeito parallax, que tem baixo desempenho em mobile */
+        background-attachment: scroll; 
+    }
+
+    /* --- Seção de Contato --- */
+    #contato .map-container iframe {
+        /* Reduz a altura dos mapas para economizar espaço vertical */
+        height: 250px;
+    }
+
+    /* --- Rodapé --- */
+    footer .text-md-start {
+        /* Centraliza o texto no rodapé em telas pequenas para melhor aparência */
+        text-align: center !important;
+    }
+    footer .text-md-end {
+        /* Centraliza os ícones sociais no rodapé */
+        text-align: center !important;
+        margin-top: 20px;
+    }
+}
+
+/* --- Estilo para o Botão Flutuante do WhatsApp --- */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: all 0.3s ease-in-out;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    color: #FFF;
+}
