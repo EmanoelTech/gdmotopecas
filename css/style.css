@@ -126,7 +126,6 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 150px;
     height: 100px;
 }
 
@@ -170,23 +169,30 @@ html {
     border: 0;
     box-shadow: 0 5px 15px rgba(0,0,0,0.08);
     border-top: 4px solid var(--cor-primaria);
-    height: 100%;
+    /* Garante que todos os cards no carrossel tenham a mesma altura */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.testimonial-card .card-body { font-style: italic; color: #555; }
+.testimonial-card .card-body { 
+    font-style: italic; 
+    color: #555; 
+}
+
 .testimonial-card .card-footer {
-    background: none; border-top: 0;
+    background: none; 
+    border-top: 0;
     display: flex;
-    align-items: center;
+    /* Ajuste principal: centraliza o conteúdo (o nome) horizontalmente */
+    justify-content: center;
+    text-align: center;
+    padding-top: 0;
 }
-.testimonial-card .card-footer img {
-    width: 50px; height: 50px;
-    border-radius: 50%;
-    margin-right: 15px;
-    object-fit: cover;
-}
+
 .testimonial-card .card-footer span {
     font-weight: bold;
+    font-style: normal; /* Garante que o nome não fique em itálico */
     color: var(--cor-secundaria);
 }
 
@@ -272,6 +278,8 @@ Aqui começam os ajustes para telas menores
 }
 
 /* --- Estilo para o Botão Flutuante do WhatsApp --- */
+
+/* Estilo principal do botão */
 .whatsapp-float {
     position: fixed;
     width: 60px;
@@ -281,14 +289,95 @@ Aqui começam os ajustes para telas menores
     background-color: #25d366;
     color: #FFF;
     border-radius: 50px;
-    text-align: center;
-    font-size: 30px;
+    font-size: 30px; /* Mantém o tamanho do ícone */
     box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
     z-index: 1000;
-    transition: all 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+    animation: pulse-whatsapp 2s infinite; /*Animação pulsante do icone do Whatsapp*/
+     text-decoration: none;
+
+    /* --- AJUSTE PARA CENTRALIZAÇÃO PERFEITA DO ÍCONE --- */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+/* Quando o usuário passa o mouse, a animação para e o botão aumenta um pouco */
 .whatsapp-float:hover {
+    animation: none; /* Pausa a animação pulsante */
     transform: scale(1.1);
-    color: #FFF;
+    color: #FFF; /* Garante que o ícone continue branco */
+}
+
+/* A Caixa de Texto (Tooltip) que aparece no hover */
+.whatsapp-float::before {
+    content: 'Fale Conosco!';
+    position: absolute;
+    top: 50%;
+    right: 75px; /* Posiciona o texto à esquerda do botão */
+    transform: translateY(-50%);
+    background-color: #075e54; /* Um tom de verde escuro do WhatsApp */
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    white-space: nowrap; /* Garante que o texto não quebre a linha */
+    font-size: 14px;
+    font-weight: 600;
+    font-family: var(--fonte-corpo); /* Usa a mesma fonte do site */
+    
+    /* A mágica para aparecer e desaparecer suavemente */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Faz o Tooltip aparecer quando o mouse está sobre o botão */
+.whatsapp-float:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* A Animação Pulsante (usando @keyframes) */
+@keyframes pulse-whatsapp {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+/* Pequeno ajuste para telas de celular */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    /* No celular, o conceito de "passar o mouse" não existe, então é melhor esconder o tooltip */
+    .whatsapp-float::before {
+         display: none;
+    }
+}
+
+/* --- Ajuste para o Carrossel Contínuo de Depoimentos --- */
+.depoimentos-swiper .swiper-wrapper {
+    /* Garante que a transição da animação seja perfeitamente linear */
+    transition-timing-function: linear !important;
+}
+
+.depoimentos-swiper .swiper-slide {
+    width: 350px; /* Largura padrão para um depoimento em telas maiores */
+}
+
+@media (max-width: 768px) {
+    .depoimentos-swiper .swiper-slide {
+        width: 80%; /* No celular, o slide ocupa 80% da tela */
+    }
 }
